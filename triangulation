@@ -2,6 +2,42 @@ from itertools import product
 from math import ceil
 import random 
 
+def isIsomorphic(degSeq1,degSeq2,polygonNodes):
+
+    degreeSequenceSet=set()
+    degreeSequenceSet.add(str(degSeq1))
+
+    for i in range (1,polygonNodes):
+        degreeSequenceSet.add(str(shiftRight(degSeq1,i)))
+
+    if str(degSeq2) in degreeSequenceSet:
+        return True
+
+    if  str(degSeq2[::-1]) in degreeSequenceSet:
+        return True
+
+    return False
+
+
+
+
+def getDegreeSequence(triangulation):
+    nodeToCount=dict()
+    for triangolo in randomTriangulation:
+        for nodo in triangolo:
+            if nodo in nodeToCount:
+                nodeToCount[nodo]+=1
+            else:
+                nodeToCount[nodo]=2
+
+    degreeSequence=list()
+    for node in sorted(nodeToCount.keys()):
+        degreeSequence.append(nodeToCount[node])
+
+    return degreeSequence
+
+
+
 def getIsomorphicCount(randomTriangulation):
     nodeToCount=dict()
     for triangolo in randomTriangulation:
@@ -31,7 +67,7 @@ def getIsomorphicCount(randomTriangulation):
 def getPolygonTuple(polygonNodes):
     tupleToReturn=tuple()
     for i in range(1,polygonNodes+1):
-        tupleToReturn=tupleToReturn+tuple(str(i))
+        tupleToReturn=tupleToReturn+tuple(str(chr(i)))
 
     return tupleToReturn
 
@@ -85,8 +121,9 @@ def triangulations(p,randInt):
     return result
 
 counter=0
-polygonNodes=6
+polygonNodes=12
 exToCount=dict()
+exToDegreeSequence=dict()
 
 for j in range (0,10000):
     nonTrovato=True
@@ -107,10 +144,28 @@ for j in range (0,10000):
                 exToCount[str(randomTriangulation)]+=1
             else:
                  exToCount[str(randomTriangulation)]=1
+                 exToDegreeSequence[str(randomTriangulation)]=getDegreeSequence(randomTriangulation)
 
 
+
+
+notIsomorphicToCount=dict()
 
 for t in exToCount:
-    print(str(t)+","+str(exToCount[t]))
+    tFound=False
+    degreeSeqOft=exToDegreeSequence[str(t)]
 
+    for nI in notIsomorphicToCount:
+        listOfInteger=list()
+        for integ in nI.split(","):
+            listOfInteger.append(int(integ))
+        if isIsomorphic(degreeSeqOft,listOfInteger,polygonNodes):
+            notIsomorphicToCount[nI]+=exToCount[t]
+            tFound=True
+            break
+    if(tFound==False):
+        notIsomorphicToCount[str(degreeSeqOft)[1:-1]]=exToCount[t]
 
+for t in notIsomorphicToCount:
+    print(str(t)+","+str(notIsomorphicToCount[t]))
+print(len(notIsomorphicToCount))
