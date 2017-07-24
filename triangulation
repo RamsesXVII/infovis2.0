@@ -1,4 +1,42 @@
 from itertools import product
+from math import ceil
+import random 
+
+def getIsomorphicCount(randomTriangulation):
+    nodeToCount=dict()
+    for triangolo in randomTriangulation:
+        for nodo in triangolo:
+            if nodo in nodeToCount:
+                nodeToCount[nodo]+=1
+            else:
+                nodeToCount[nodo]=2
+
+    degreeSequence=list()
+    for node in sorted(nodeToCount.keys()):
+        degreeSequence.append(nodeToCount[node])
+
+    degreeSequenceSet=set()
+    degreeSequenceSet.add(str(degreeSequence))
+
+    for i in range (1,polygonNodes):
+        degreeSequenceSet.add(str(shiftRight(degreeSequence,i)))
+
+    eqRotations=len(degreeSequenceSet)
+    mirroredDegree=str(degreeSequence[::-1])
+
+    if mirroredDegree not in degreeSequenceSet:
+        eqRotations=eqRotations*2
+    return eqRotations
+
+def getPolygonTuple(polygonNodes):
+    tupleToReturn=tuple()
+    for i in range(1,polygonNodes+1):
+        tupleToReturn=tupleToReturn+tuple(str(i))
+
+    return tupleToReturn
+
+def shiftRight(listToRotate,n):
+    return listToRotate[-n:]+listToRotate[:-n]
 
 def getCatalanNumber(n):
     return catnumber(n-2)
@@ -30,11 +68,7 @@ def triangulations(p,randInt):
 
             if randInt<=(prodOfCat+counter):
                 delta=randInt-counter
-                randLeft=int(delta/rightCat)
-
-                if(rightCat!=1):
-                    randLeft+=1
-
+                randLeft=ceil(delta/rightCat)
                 randRight=int(delta%rightCat)
 
                 if(randRight==0):
@@ -43,20 +77,40 @@ def triangulations(p,randInt):
                 for u, v in product(triangulations(leftT,randLeft), triangulations(rightT,randRight)):
                     result.append( u + [(p[0], p[k], p[-1])] + v)
 
+                
                 return result
 
             else:
                 counter+=prodOfCat
     return result
 
-triangulation=set()
-for i in range(1,133):
-    tr=triangulations(tuple("12345678"),i)
-    print(tr)
-    print(i)
-    if (str(tr) in triangulation):
-        print("***************")
-    triangulation.add(str(tr))
+counter=0
+polygonNodes=6
+exToCount=dict()
 
-print(len(triangulation))
-print(getCatalanNumber(8))
+for j in range (0,10000):
+    nonTrovato=True
+
+    while(nonTrovato):
+        counter+=1
+        randInt=random.randint(1,getCatalanNumber(polygonNodes))
+
+        polygon=getPolygonTuple(polygonNodes)
+        tr=triangulations(polygon,randInt)
+
+        randomTriangulation=tr[0]
+        isomorphicCount=getIsomorphicCount(randomTriangulation)
+        normalizer=random.randint(1,isomorphicCount)
+        if(normalizer==1):
+            nonTrovato=False
+            if str(randomTriangulation) in exToCount:
+                exToCount[str(randomTriangulation)]+=1
+            else:
+                 exToCount[str(randomTriangulation)]=1
+
+
+
+for t in exToCount:
+    print(str(t)+","+str(exToCount[t]))
+
+
