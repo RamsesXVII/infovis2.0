@@ -121,51 +121,58 @@ def triangulations(p,randInt):
     return result
 
 counter=0
-polygonNodes=12
-exToCount=dict()
-exToDegreeSequence=dict()
+for contatore in range(6,15):
+    conttoreEstrazioni=0
+    polygonNodes=contatore
+    print(polygonNodes)
+    print("ooooooooooooooooooooooooooooooooo")
+    exToCount=dict()
+    exToDegreeSequence=dict()
 
-for j in range (0,10000):
-    nonTrovato=True
+    for j in range (0,50000):
+        nonTrovato=True
 
-    while(nonTrovato):
-        counter+=1
-        randInt=random.randint(1,getCatalanNumber(polygonNodes))
+        while(nonTrovato):
+            conttoreEstrazioni+=1
+            counter+=1
+            randInt=random.randint(1,getCatalanNumber(polygonNodes))
 
-        polygon=getPolygonTuple(polygonNodes)
-        tr=triangulations(polygon,randInt)
+            polygon=getPolygonTuple(polygonNodes)
+            tr=triangulations(polygon,randInt)
 
-        randomTriangulation=tr[0]
-        isomorphicCount=getIsomorphicCount(randomTriangulation)
-        normalizer=random.randint(1,isomorphicCount)
-        if(normalizer==1):
-            nonTrovato=False
-            if str(randomTriangulation) in exToCount:
-                exToCount[str(randomTriangulation)]+=1
-            else:
-                 exToCount[str(randomTriangulation)]=1
-                 exToDegreeSequence[str(randomTriangulation)]=getDegreeSequence(randomTriangulation)
-
-
+            randomTriangulation=tr[0]
+            isomorphicCount=getIsomorphicCount(randomTriangulation)
+            normalizer=random.randint(1,isomorphicCount)
+            if(normalizer==1):
+                nonTrovato=False
+                if str(randomTriangulation) in exToCount:
+                    exToCount[str(randomTriangulation)]+=1
+                else:
+                     exToCount[str(randomTriangulation)]=1
+                     exToDegreeSequence[str(randomTriangulation)]=getDegreeSequence(randomTriangulation)
 
 
-notIsomorphicToCount=dict()
 
-for t in exToCount:
-    tFound=False
-    degreeSeqOft=exToDegreeSequence[str(t)]
 
-    for nI in notIsomorphicToCount:
-        listOfInteger=list()
-        for integ in nI.split(","):
-            listOfInteger.append(int(integ))
-        if isIsomorphic(degreeSeqOft,listOfInteger,polygonNodes):
-            notIsomorphicToCount[nI]+=exToCount[t]
-            tFound=True
-            break
-    if(tFound==False):
-        notIsomorphicToCount[str(degreeSeqOft)[1:-1]]=exToCount[t]
+    notIsomorphicToCount=dict()
 
-for t in notIsomorphicToCount:
-    print(str(t)+","+str(notIsomorphicToCount[t]))
-print(len(notIsomorphicToCount))
+    for t in exToCount:
+        tFound=False
+        degreeSeqOft=exToDegreeSequence[str(t)]
+
+        for nI in notIsomorphicToCount:
+            listOfInteger=list()
+            for integ in nI.split(","):
+                listOfInteger.append(int(integ))
+            if isIsomorphic(degreeSeqOft,listOfInteger,polygonNodes):
+                notIsomorphicToCount[nI]+=exToCount[t]
+                tFound=True
+                break
+        if(tFound==False):
+            notIsomorphicToCount[str(degreeSeqOft)[1:-1]]=exToCount[t]
+
+    for t in notIsomorphicToCount:
+        print(str(t)+","+str(notIsomorphicToCount[t]))
+
+    print(len(notIsomorphicToCount))
+    print("estrazioni "+str(conttoreEstrazioni))
