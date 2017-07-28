@@ -4,8 +4,9 @@
 
 1. [Obiettivi](#obiettivi)
 2. [Approcci](#approcci)
-3. [Dagli unrooted binary tree ai grafi planari](#approccio1)
-4. [Triangolazione di poligoni convessi](#approccio2)
+3. [Dagli unrooted binary tree ai grafi planari]( #approccio1)
+4. [Triangolazione di poligoni convessi]( #approccio2)
+5. [Validazione]( #validazione)
 
 
 
@@ -30,7 +31,7 @@ Nel caso particolare della triangolazione dei poligoni convessi il numero risult
 Si noti tuttavia che gli elementi non isomorfi sono in realtà soltanto 3. Adottando questa strategia è dunque necessario risolvere un problema di isomorfismo, eliminando le copie .
 
 
-# Approccio1
+# Approccio 1
 ## Dagli unrooted binary tree ai grafi planari
 
 Dalla lettura del paper [Generating Outerplanar Graphs Uniformly at Random](https://www.cambridge.org/core/journals/combinatorics-probability-and-computing/article/generating-outerplanar-graphs-uniformly-at-random/DA7B9E91184052CA32153FC83A4A7ED8) è risultato evidente che il problema di generare tutti i possibili maximal outerplanar graph di *n* lati  è equivalente a quello di generare tutti i possibili unrooted binary tree ordinati con *n* foglie. Questa famiglia di alberi ha la seguente peculiarità: ogni nodo dell’albero o è una foglia o deve avere grado tre.
@@ -39,7 +40,7 @@ L’idea dietro l’algoritmo è la seguente: volendo generare un unrooted binar
 Un’implementazione dell’algoritmo descritto è presente nel file binaryTreeUnrooted.py .
 Il problema di questo approccio è che vengono generati molti alberi isomorfi difficili da distinguere che ovviamente generano gli stessi outerplanar graph. 
 
-# Approccio2
+# Approccio 2
 ## Triangolazione di poligoni convessi
 
 Abbandonata l’idea di generare i grafi outerplanari a partire dagli alberi, si è voluto procedere con l’approccio basato sulle triangolazioni del poligono convesso.
@@ -77,161 +78,22 @@ L'enumerazione delle foglie viene costruita come segue: a ciascun nodo dell'albe
 Per quello che riguarda il calcolo delgli ismorfismi di un determinato elemento si sfrutta una proprietà dei grafi planari riportata in [Rencostruction of maximal outerplanar graphs](http://ac.els-cdn.com/0012365X72900076/1-s2.0-0012365X72900076-main.pdf?_tid=1255f97e-7382-11e7-9d07-00000aab0f01&acdnat=1501238995_2af031d7b204f70c6f758f9a2c8d54f7), per la quale una label degree sequence è associata univocamente ad una configurazione del grafo. E' perciò possibile calcolare il numero di isomorfi genenerando le *n-1*  label degree sequence ottenute tramite rotazione circolare della triangolazione ottenuta e contare il numero *S* di sequenze identiche.
 Questo è il numero di isomorfi ruotati generati; per il calcolo del numero di mirror presenti è invece necessario ribaltare la sequenza e vedere se c'è una sovrapposizione con una delle *n-1* sequenze precedentemente generate. In caso affermativo il numero di isomorfi è *Sx2*, altrimenti è pari a *S*.
 
+# Validazione
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
+Il processo di validazione dell’algoritmo sopra descritto presenta diverse analogie con la verificare della non-contraffazione di un dado da gioco. Nel caso in questione il dado *F* facce, dove *F* è il numero delle possibili rappresentazioni di un grafo planare massimale non etichettato; mentre la probabilità che esca una configurazione piuttosto che un’altra è data da *1/F*. Similmente a quanto viene fatto per la verifica dei dadi, si è quindi effettuato un test del Chi quadro, ampiamente utilizzato per verificare che le frequenze dei valori osservati si adattino alle frequenze teoriche di una distribuzione di probabilità prefissata.
 
-This text you see here is *actually* written in Markdown! To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.
+Similmente a quanto viene fatto per la verifica dei dadi, si è quindi effettuato un test del Chi quadro, ampiamente utilizzato per verificare che le frequenze dei valori osservati si adattino alle frequenze teoriche di una distribuzione di probabilità prefissata. Fissato l'errore tollerato al 5% (p-value = 0.05), dando uno sguardo alle tavole della distribuzione chi quadrato con *F-1* gradi di libertà  è risultato molto semplice verificare se rifiutare l'ipotesi nulla o meno. 
+Il test del chi quadro è stato eseguito per  poligoni con *n* lati, con n compreso tra 6 e 13. Nella tabella sottostante sono riportati i risultati del test ottenuti:
 
-### Tech
-
-Dillinger uses a number of open source projects to work properly:
-
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [Breakdance](http://breakdance.io) - HTML to Markdown converter
-* [jQuery] - duh
-
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
-### Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
-
-For production environments...
-
-```sh
-$ npm install --production
-$ npm run predeploy
-$ NODE_ENV=production node app
-```
-
-### Plugins
-
-Dillinger is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
-
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md] [PlDb] |
-| Github | [plugins/github/README.md] [PlGh] |
-| Google Drive | [plugins/googledrive/README.md] [PlGd] |
-| OneDrive | [plugins/onedrive/README.md] [PlOd] |
-| Medium | [plugins/medium/README.md] [PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md] [PlGa] |
+| Lati del poligono | Estrazioni effettive/Grafi generati | Poligoni non isomorfi | Chi square ottenuto | Limite  |
+|-------------------|-------------------------------------|-----------------------|---------------------|---------|
+| 6                 | 232490/50000                        | 3                     | 0.00312             | 5.991   |
+| 7                 | 526009/50000                        | 4                     | 5.752               | 7.815   |
+| 8                 | 548027/50000                        | 12                    | 9.161               | 19.675  |
+| 9                 | 802363/50000                        | 27                    | 21.4840             | 38.885  |
+| 10                | 874090/50000                        | 82                    | 78.807              | 103.010 |
+| 11                | 1058893/50000                       | 228                   | 223.2968            | 263.147 |
+| 12                | 1144664/50000                       | 733                   | 672.499             | ~796    |
+| 13                | 1287160/50000                       | 2282                  | 2339.5238           | ~2393   |
 
 
-### Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
-```
-
-Second Tab:
-```sh
-$ gulp watch
-```
-
-(optional) Third:
-```sh
-$ karma test
-```
-#### Building for source
-For production release:
-```sh
-$ gulp build --prod
-```
-Generating pre-built zip archives for distribution:
-```sh
-$ gulp build dist --prod
-```
-### Docker
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 80, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.
-
-```sh
-cd dillinger
-docker build -t joemccann/dillinger:${package.json.version}
-```
-This will create the dillinger image and pull in the necessary dependencies. Be sure to swap out `${package.json.version}` with the actual version of Dillinger.
-
-Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 8000 of the host to port 80 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 8000:8080 --restart="always" <youruser>/dillinger:${package.json.version}
-```
-
-Verify the deployment by navigating to your server address in your preferred browser.
-
-```sh
-127.0.0.1:8000
-```
-
-#### Kubernetes + Google Cloud
-
-See [KUBERNETES.md](https://github.com/joemccann/dillinger/blob/master/KUBERNETES.md)
-
-
-### Todos
-
- - Write MOAR Tests
- - Add Night Mode
-
-License
-----
-
-MIT
-
-
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
