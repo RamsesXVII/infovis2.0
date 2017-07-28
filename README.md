@@ -42,10 +42,20 @@ Il problema di questo approccio è che vengono generati molti alberi isomorfi di
 # Approccio 2
 ## Triangolazione di poligoni convessi
 
-Abbandonata l’idea di generare i grafi outerplanar a partire dagli alberi, si è voluto procedere con l’approccio basato sulle triangolazioni del poligono convesso.
-In letteratura sono presenti diversi algoritmi per la generazione di grafi outerplanari etichettati, piuttosto ridotta è invece la documentazione relativa a quelli non etichettati.
+Abbandonata l’idea di generare i grafi outerplanari a partire dagli alberi, si è voluto procedere con l’approccio basato sulle triangolazioni del poligono convesso.
+In letteratura sono presenti diversi algoritmi per la generazione di grafi outerplanari etichettati, piuttosto ridotta è invece la documentazione relativa a quelli non etichettati. Dall'articolo presente su  [Garethrees](http://garethrees.org/2013/06/15/triangulation/) abbiamo scelto di adottare la seguente funzione per la generazione di tutte le possibili triangolaizioni:
 ```sh
 def triangulations(p):
+    """Generate the triangulations of the convex polygon p.
+    The sequence p consists of the vertices of the polygon.
+    Each triangulation in the output is a list of triangles, and each
+    triangle is a tuple of three vertices.
+
+    >>> list(triangulations(tuple('abcd')))
+    [[('a', 'b', 'd'), ('b', 'c', 'd')], [('a', 'b', 'c'), ('a', 'c', 'd')]]
+    >>> [sum(1 for _ in triangulations(range(i))) for i in range(3, 8)]
+    [1, 2, 5, 14, 42]
+    """
     n = len(p)
     if n == 2:
         yield []
@@ -56,15 +66,13 @@ def triangulations(p):
             for u, v in product(triangulations(p[:k + 1]), triangulations(p[k:])):
                 yield u + [(p[0], p[k], p[-1])] + v
 ```
+Essenzialmente si tratta della generazione di un albero in cui le foglie costituiscono le possibili triangolazioni. Tali triangolazioni, come specificato nella sezione precedente, sono però etichettate e quindi non c'è una distribuzione uniforme al numero di isomorfismi.
+L'algortimo  di generazione randomica in modo uniforme dei grafi in questione si articola quindi nelle seguenti fasi:
+- Estrazione di un numero randomico *r* compreso tra *1* e il numero Catalano di *N*.
+- Viene generata soltanto l' *r*-esima triangolazione del poligono, senza costruire l'intero albero.
+- E' calcolato il numero *I* di isomorfi della triangolazione estratta. Poichè diverse classi possono avere numeri di rotazione e mirroring diversi è necessario normalizzare la probabilità con cui viene estratto un determinato elemento. Per questo vengono estratti due numeri randomici tra *1* e *I* e se questi 2 numeri coincidono allora la triangolazione viene presa altrimenti il processo viene ripetuto.
 
-
-You can also:
-  - Import and save files from GitHub, Dropbox, Google Drive and One Drive
-  - Drag and drop markdown and HTML files into Dillinger
-  - Export documents as Markdown, HTML and PDF
-
-Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][df1]
-
+L'enumerazione delle foglie viene costruita come segue: a ciascun nodo dell'albero di generazione è associata la dimensione dei sottoalberi a lui radicati effettuando il prodotto tra i numeri catalani associati alla triangolazione del nodo di riferimento. Ad ogni iterazione viene quindi selezionato il branch il cui range di valori comprende il numero estratto. 
 > The overriding design goal for Markdown's
 > formatting syntax is to make it as readable
 > as possible. The idea is that a
