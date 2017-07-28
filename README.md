@@ -102,3 +102,5 @@ Osservando le ultime due colonne si può apprezzare il fatto che sia sempre poss
 
 Possiamo concludere che il nostro “dado” è equilibrato.
 
+# Esecuzione 
+Per eseguire il software è necessario eseguire i seguenti comandi
