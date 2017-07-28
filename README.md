@@ -30,7 +30,7 @@ Nel caso particolare della triangolazione dei poligoni convessi il numero risult
 Si noti tuttavia che gli elementi non isomorfi sono in realtà soltanto 3. Adottando questa strategia è dunque necessario risolvere un problema di isomorfismo, eliminando le copie .
 
 
-# Approccio 1
+# Approccio1
 ## Dagli unrooted binary tree ai grafi planari
 
 Dalla lettura del paper [Generating Outerplanar Graphs Uniformly at Random](https://www.cambridge.org/core/journals/combinatorics-probability-and-computing/article/generating-outerplanar-graphs-uniformly-at-random/DA7B9E91184052CA32153FC83A4A7ED8) è risultato evidente che il problema di generare tutti i possibili maximal outerplanar graph di *n* lati  è equivalente a quello di generare tutti i possibili unrooted binary tree ordinati con *n* foglie. Questa famiglia di alberi ha la seguente peculiarità: ogni nodo dell’albero o è una foglia o deve avere grado tre.
@@ -39,7 +39,7 @@ L’idea dietro l’algoritmo è la seguente: volendo generare un unrooted binar
 Un’implementazione dell’algoritmo descritto è presente nel file binaryTreeUnrooted.py .
 Il problema di questo approccio è che vengono generati molti alberi isomorfi difficili da distinguere che ovviamente generano gli stessi outerplanar graph. 
 
-# Approccio 2
+# Approccio2
 ## Triangolazione di poligoni convessi
 
 Abbandonata l’idea di generare i grafi outerplanari a partire dagli alberi, si è voluto procedere con l’approccio basato sulle triangolazioni del poligono convesso.
