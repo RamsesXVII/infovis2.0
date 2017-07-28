@@ -74,7 +74,7 @@ def triangulations(p):
 ```
 Essenzialmente si tratta della generazione di un albero in cui le foglie costituiscono le possibili triangolazioni. Tali triangolazioni, come specificato nella sezione precedente, sono però etichettate e quindi non c'è una distribuzione uniforme al numero di isomorfismi.
 L'algortimo  di generazione randomica in modo uniforme dei grafi in questione si articola quindi nelle seguenti fasi:
-- Estrazione di un numero randomico *r* compreso tra *1* e il numero Catalano di *N*.
+- Estrazione di un numero randomico *r* compreso tra *1* e il numero Catalano di *N*. L'estrazione di questo numero consentirà di scegliere in modo uniforme e randomico una delle possibili triangolazioni etichettate del poligono.
 - Viene generata soltanto l' *r*-esima triangolazione del poligono, senza costruire l'intero albero.
 - E' calcolato il numero *I* di isomorfi della triangolazione estratta. Poichè diverse classi possono avere numeri di rotazione e mirroring diversi è necessario normalizzare la probabilità con cui viene estratto un determinato elemento. Per questo vengono estratti due numeri randomici tra *1* e *I* e se questi 2 numeri coincidono allora la triangolazione viene presa altrimenti il processo viene ripetuto.
 
