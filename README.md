@@ -25,7 +25,7 @@ L'obiettivo del progetto proposto in questa pagina è quindi quello di definire 
 
 Per entrambi gli approcci una possibile soluzione potrebbe essere quella di utilizzare un algoritmo che genera tutti gli elementi della collezione per poi selezionarne randomicamente uno. Tale soluzione, tuttavia,  risulta impraticabile al crescere della dimensione del grafo. In particolare si ha che il numero di possibili outerplanar diversi al crescere di *n* segue la sequenza: 
 
-1, 1, 1, 3, 4, 12, 27, 82, 228, 733, 2282, 7528, 24834, 83898, 285357, 983244, 3412420, 11944614, 42080170, 149197152, 531883768, 1905930975, 6861221666, 24806004996, 90036148954, 327989004892, 1198854697588, 4395801203290, 16165198379984, 59609171366326, 220373278174641
+> 1, 1, 1, 3, 4, 12, 27, 82, 228, 733, 2282, 7528, 24834, 83898, 285357, 983244, 3412420, 11944614, 42080170, 149197152, 531883768, 1905930975, 6861221666, 24806004996, 90036148954, 327989004892, 1198854697588, 4395801203290, 16165198379984, 59609171366326, 220373278174641
 
 Nel caso particolare della triangolazione dei poligoni convessi il numero risulta invece associato al numero catalano. I risultati di questi algoritmi presentano quindi ripetizioni di possibili configurazioni in termini di rotazioni e mirroring. Nel caso specifico di un esagono risulta che le possibili triangolazioni sono le seguenti:
 
