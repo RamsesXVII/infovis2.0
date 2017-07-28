@@ -29,8 +29,9 @@ Per entrambi gli approcci una possibile soluzione potrebbe essere quella di util
 
 Nel caso particolare della triangolazione dei poligoni convessi il numero risulta invece associato al numero catalano. I risultati di questi algoritmi presentano quindi ripetizioni di possibili configurazioni in termini di rotazioni e mirroring. Nel caso specifico di un esagono risulta che le possibili triangolazioni sono le seguenti:
 
-
-[![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Catalan-Hexagons-example.svg/680px-Catalan-Hexagons-example.svg.png)](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Catalan-Hexagons-example.svg/680px-Catalan-Hexagons-example.svg.png)
+<p align="center">
+  <img width="460" height="300" src="(https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Catalan-Hexagons-example.svg/680px-Catalan-Hexagons-example.svg.png">
+</p>
 
 Si noti tuttavia che gli elementi non isomorfi sono in realtà soltanto 3. Adottando questa strategia è dunque necessario risolvere un problema di isomorfismo, eliminando le copie .
 
