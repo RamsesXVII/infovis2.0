@@ -4,8 +4,8 @@
 
 1. [Obiettivi](#obiettivi)
 2. [Approcci](#approcci)
-3. [Dagli unrooted binary tree ai grafi planari]( #approccio1)
-4. [Triangolazione di poligoni convessi]( #approccio2)
+3. [Dagli unrooted binary tree ai grafi planari](#approccio1)
+4. [Triangolazione di poligoni convessi](#approccio2)
 
 
 
