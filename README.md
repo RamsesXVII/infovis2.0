@@ -30,7 +30,7 @@ Nel caso particolare della triangolazione dei poligoni convessi il numero risult
 Si noti tuttavia che gli elementi non isomorfi sono in realtà soltanto 3. Adottando questa strategia è dunque necessario risolvere un problema di isomorfismo, eliminando le copie .
 
 
-# Approccio1
+# Approccio 1
 ## Dagli unrooted binary tree ai grafi planari
 
 Dalla lettura del paper [Generating Outerplanar Graphs Uniformly at Random](https://www.cambridge.org/core/journals/combinatorics-probability-and-computing/article/generating-outerplanar-graphs-uniformly-at-random/DA7B9E91184052CA32153FC83A4A7ED8) è risultato evidente che il problema di generare tutti i possibili maximal outerplanar graph di *n* lati  è equivalente a quello di generare tutti i possibili unrooted binary tree ordinati con *n* foglie. Questa famiglia di alberi ha la seguente peculiarità: ogni nodo dell’albero o è una foglia o deve avere grado tre.
@@ -39,7 +39,7 @@ L’idea dietro l’algoritmo è la seguente: volendo generare un unrooted binar
 Un’implementazione dell’algoritmo descritto è presente nel file binaryTreeUnrooted.py .
 Il problema di questo approccio è che vengono generati molti alberi isomorfi difficili da distinguere che ovviamente generano gli stessi outerplanar graph. 
 
-# Approccio2
+# Approccio 2
 ## Triangolazione di poligoni convessi
 
 Abbandonata l’idea di generare i grafi outerplanari a partire dagli alberi, si è voluto procedere con l’approccio basato sulle triangolazioni del poligono convesso.
@@ -73,6 +73,11 @@ L'algortimo  di generazione randomica in modo uniforme dei grafi in questione si
 - E' calcolato il numero *I* di isomorfi della triangolazione estratta. Poichè diverse classi possono avere numeri di rotazione e mirroring diversi è necessario normalizzare la probabilità con cui viene estratto un determinato elemento. Per questo vengono estratti due numeri randomici tra *1* e *I* e se questi 2 numeri coincidono allora la triangolazione viene presa altrimenti il processo viene ripetuto.
 
 L'enumerazione delle foglie viene costruita come segue: a ciascun nodo dell'albero di generazione è associata la dimensione dei sottoalberi a lui radicati effettuando il prodotto tra i numeri catalani associati alla triangolazione del nodo di riferimento. Ad ogni iterazione viene quindi selezionato il branch il cui range di valori comprende il numero estratto. 
+
+Per quello che riguarda il calcolo delgli ismorfismi di un determinato elemento si sfrutta una proprietà dei grafi planari riportata in [Rencostruction of maximal outerplanar graphs](http://ac.els-cdn.com/0012365X72900076/1-s2.0-0012365X72900076-main.pdf?_tid=1255f97e-7382-11e7-9d07-00000aab0f01&acdnat=1501238995_2af031d7b204f70c6f758f9a2c8d54f7), per la quale una label degree sequence è associata univocamente ad una configurazione del grafo. E' perciò possibile calcolare il numero di isomorfi genenerando le *n-1*  label degree sequence ottenute tramite rotazione circolare della triangolazione ottenuta e contare il numero *S* di sequenze identiche.
+Questo è il numero di isomorfi ruotati generati; per il calcolo del numero di mirror presenti è invece necessario ribaltare la sequenza e vedere se c'è una sovrapposizione con una delle *n-1* sequenze precedentemente generate. In caso affermativo il numero di isomorfi è *Sx2*, altrimenti è pari a *S*.
+
+
 > The overriding design goal for Markdown's
 > formatting syntax is to make it as readable
 > as possible. The idea is that a
