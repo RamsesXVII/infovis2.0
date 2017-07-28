@@ -108,4 +108,6 @@ Osservando le ultime due colonne si può apprezzare il fatto che sia sempre poss
 Possiamo concludere che il nostro “dado” è equilibrato.
 
 # Esecuzione 
-Per eseguire il software è necessario eseguire i seguenti comandi
+Per eseguire il software è sufficiente scaricare la repository, installare i moduli richiesti e digitare i seguenti comandi:
+- per generare un grafo outerplanare massimale di *n* nodi 'python MainGenerator.py S <n>'. L'output è l'insieme di triangolazioni espresse come triple di vertici.
+-per generare *K* grafi outerplanari massimali per ciascun grafo di *n* nodi con *n* compreso tra *i* e *j* 'python MainGenerator.py M <i> <j>. L'output sono i grafi outerplanari massimali espressi come  label degree sequence e la relativa conta. Viene anche fornito il valore del chi quadro.
