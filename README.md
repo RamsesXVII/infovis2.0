@@ -96,4 +96,9 @@ Il test del chi quadro è stato eseguito per  poligoni con *n* lati, con n compr
 | 12                | 1144664/50000                       | 733                   | 672.499             | ~796    |
 | 13                | 1287160/50000                       | 2282                  | 2339.5238           | ~2393   |
 
+Per ogni poligono di n lati sono state eseguite 50000 estrazioni; nella seconda colonna è riportato il numero di estrazioni effettive sul numero di grafi generati.
+Sempre nella tabella è mostrato il chi square ottenuto dal nostro test e qil valore limite presente nella tavole di distribuzione  chi quadrato (gradi di libertà  a(n) -1 e p-value=0.05). 
+Osservando le ultime due colonne si può apprezzare il fatto che sia sempre possibile accettare l'ipotesi nulla per ogni poligono di n lati: la penultima colonna della tabella (il risultato del nostro test) contiene per ogni riga valori della statistica test inferiori a quelli contenuti nell’ultima (risultato atteso).
+
+Possiamo concludere che il nostro “dado” è equilibrato.
 
