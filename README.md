@@ -1,31 +1,20 @@
 # Generating maximal outerplanar uniformly at random
+[![N|Solid](https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67)](https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67)
 #### Tabella dei contenuti
 
 1. [Obiettivi](#obiettivi)
-2. [Applicazione](#applicazione)
-    * [Descrizione](#applicazione)
-    * [Tecnologie utilizzate](#applicazione)
-3. [Configurazione VM](#configurazione)
-4. [Provisioning](#provisioning)
-    * [Apache TomEE](#apache-tomee)
-      * [Il ruolo della cartella condivisa](#cartella-condivisa)
-    * [Postgres](#postgres)
-      * [Setup](#setup)
-      * [Creazione di un database](#creazione-di-un-database)
-5. [Installazione](#installazione)
-6. [Script di Test](#script-di-test)
-7. [Comandi utili](#comandi-utili)
-8. [Todo](#todo)
-9. [Bug e problemi noti](#bug-e-problemi-noti)
-10. [Realizzatori](#realizzatori)
+2. [Approcci](#approcci)
+3. [Dagli unrooted binary tree ai grafi planari]( #approccio1)
+4. [Triangolazione di poligoni convessi]( #approccio2)
 
-[![N|Solid](https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67)](https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67)
+
+
 # Obiettivi
 
 Nella teoria dei grafi si definisce **grafo planare** un grafo che può essere raffigurato in modo che non si abbiano intersezioni di archi. 
 I **grafi outerplanari massimali** sono un sottoinsieme dei grafi planari e sono rappresentabili con tutti i vertici sulla faccia esterna del disegno, con il massimo numero di archi che non si intersecano.  
 L'obiettivo del progetto proposto in questa pagina è quindi quello di definire un algoritmo che generi grafi outerplanari non etichettati e massimali **uniformly at random**.
-# Possibili strategie
+# Approcci
 
   - Il problema è sovrapponnibile a quello della generazione di triangolazioni di un poligono convesso.
   - C'è una relazione diretta tra gli unrooted binary tree ordinati con n foglie e i grafi outerplanari massimali.
@@ -41,7 +30,8 @@ Nel caso particolare della triangolazione dei poligoni convessi il numero risult
 Si noti tuttavia che gli elementi non isomorfi sono in realtà soltanto 3. Adottando questa strategia è dunque necessario risolvere un problema di isomorfismo, eliminando le copie .
 
 
-# Dagli unrooted binary tree ai grafi planari
+# Approccio 1
+## Dagli unrooted binary tree ai grafi planari
 
 Dalla lettura del paper [Generating Outerplanar Graphs Uniformly at Random](https://www.cambridge.org/core/journals/combinatorics-probability-and-computing/article/generating-outerplanar-graphs-uniformly-at-random/DA7B9E91184052CA32153FC83A4A7ED8) è risultato evidente che il problema di generare tutti i possibili maximal outerplanar graph di *n* lati  è equivalente a quello di generare tutti i possibili unrooted binary tree ordinati con *n* foglie. Questa famiglia di alberi ha la seguente peculiarità: ogni nodo dell’albero o è una foglia o deve avere grado tre.
 Procedendo in questa direzione si è pensato ad un algoritmo che potesse generare tutti gli alberi di questa famiglia passato in input il numero di foglie desiderate.
@@ -49,8 +39,23 @@ L’idea dietro l’algoritmo è la seguente: volendo generare un unrooted binar
 Un’implementazione dell’algoritmo descritto è presente nel file binaryTreeUnrooted.py .
 Il problema di questo approccio è che vengono generati molti alberi isomorfi difficili da distinguere che ovviamente generano gli stessi outerplanar graph. 
 
+# Approccio 2
+## Triangolazione di poligoni convessi
 
-
+Abbandonata l’idea di generare i grafi outerplanar a partire dagli alberi, si è voluto procedere con l’approccio basato sulle triangolazioni del poligono convesso.
+In letteratura sono presenti diversi algoritmi per la generazione di grafi outerplanari etichettati, piuttosto ridotta è invece la documentazione relativa a quelli non etichettati.
+```sh
+def triangulations(p):
+    n = len(p)
+    if n == 2:
+        yield []
+    elif n == 3:
+        yield [p]
+    else:
+        for k in range(1, n - 1):
+            for u, v in product(triangulations(p[:k + 1]), triangulations(p[k:])):
+                yield u + [(p[0], p[k], p[-1])] + v
+```
 
 
 You can also:
