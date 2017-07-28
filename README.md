@@ -2,7 +2,7 @@
 <p align="center">
   <img width="460" height="300" src="https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67">
 </p>
-[![N|Solid](https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67)](https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67)
+
 #### Tabella dei contenuti
 
 1. [Obiettivi](#obiettivi)
@@ -28,6 +28,7 @@ Per entrambi gli approcci una possibile soluzione potrebbe essere quella di util
 1, 1, 1, 3, 4, 12, 27, 82, 228, 733, 2282, 7528, 24834, 83898, 285357, 983244, 3412420, 11944614, 42080170, 149197152, 531883768, 1905930975, 6861221666, 24806004996, 90036148954, 327989004892, 1198854697588, 4395801203290, 16165198379984, 59609171366326, 220373278174641
 
 Nel caso particolare della triangolazione dei poligoni convessi il numero risulta invece associato al numero catalano. I risultati di questi algoritmi presentano quindi ripetizioni di possibili configurazioni in termini di rotazioni e mirroring. Nel caso specifico di un esagono risulta che le possibili triangolazioni sono le seguenti:
+
 
 [![N|Solid](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Catalan-Hexagons-example.svg/680px-Catalan-Hexagons-example.svg.png)](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Catalan-Hexagons-example.svg/680px-Catalan-Hexagons-example.svg.png)
 
