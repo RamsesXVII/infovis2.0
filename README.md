@@ -75,14 +75,24 @@ def triangulations(p):
             for u, v in product(triangulations(p[:k + 1]), triangulations(p[k:])):
                 yield u + [(p[0], p[k], p[-1])] + v
 ```
-Essenzialmente si tratta della generazione di un albero in cui le foglie costituiscono tutte le possibili triangolazioni etichettate. Il proccesso è ricorsivo e viene eseguito e a partire da un nodo radice che corrisponde quindi al poligono senza triangolazioni interne.  Ogni nodo viene espanso generando i figli che corrispondono a tutte le possibili combinazioni tra gli angoli del poligono e due vertici adiacenti fissati.
+Essenzialmente si tratta della generazione di un albero in cui le foglie costituiscono tutte le possibili triangolazioni etichettate. Il proccesso è ricorsivo e viene eseguito e a partire da un nodo radice che corrisponde al poligono senza triangolazioni interne.  Ogni nodo viene quindi espanso generando i figli che corrispondono a tutte le possibili combinazioni tra gli angoli del poligono e due vertici adiacenti fissati.
 
 Tali triangolazioni, come specificato nella sezione precedente, sono però etichettate e quindi non c'è una distribuzione uniforme al numero di isomorfismi. Si noti, appunto, come nella figura precedente relativa alle triangolazioni dell'esagono, sono presenti soltanto due possibili triangolazioni per una determinata classe di triangolazioni isomorfe, mentre sono ben 6 per ciascuna delle altre due. Per risolvere questo problema ed assicurare  un'estrazione *uniformly at  random* l'algortimo si articola quindi nelle seguenti fasi:
-- Estrazione di un numero randomico *r* compreso tra *1* e il numero Catalano di *N*. L'idea di questo passaggio è di associare in modo univoco ciascuna foglia a uno di questi numeri.
-- Viene generata soltanto l' *r*-esima triangolazione del poligono, senza costruire l'intero albero.
-- E' calcolato il numero *I* di isomorfi della triangolazione estratta. Poichè diverse classi possono avere numeri di rotazione e mirroring diversi è necessario normalizzare la probabilità con cui viene estratto un determinato elemento. Per questo viene estratto  un numero random tra *1* e *I* e se questo numero coincide con *a* la triangolazione viene presa altrimenti viene scartata e il processo viene ripetuto.
+- Estrazione di un numero randomico *r* compreso tra *1* e il numero Catalano di *N*. L'idea di questo passaggio è di associare in modo univoco ciascuna foglia a uno di questi numeri e viceversa.
+- E' generata soltanto l' *r*-esima triangolazione del poligono e il relativo sottoalbero, senza costruire l'intero albero di generazione.
+- E' calcolato il numero *I* di isomorfi della triangolazione estratta. Poichè diverse classi possono avere numeri di rotazione e mirroring diversi è necessario normalizzare la probabilità con cui viene estratto un determinato elemento. Ottenuta dunque una determinata triangolazione viene estratto  un numero random tra *1* e *I* e se questo numero coincide con *a* la triangolazione viene presa altrimenti viene scartata e il processo viene ripetuto.
 
-L'enumerazione delle foglie viene costruita come segue: a ciascun nodo dell'albero di generazione è associata la dimensione dei sottoalberi a lui radicati effettuando il prodotto tra i numeri catalani associati alla triangolazione del nodo di riferimento. Ad ogni iterazione viene quindi selezionato il branch il cui range di valori comprende il numero estratto. 
+I primi due passi dell'algoritmo assicurano due caratteristiche fondamentali: è definita un'enumerazione per la quale non è necessario generare l'intero albero per l'accesso alla k-esima triangolazione e la generazione di un elemento è uniformly at random rispetto al totale delle triangolazioni etichettate. Questa strategia è possibile perchè si può stimare facilmente la dimensione del sotttoalbero radicato a ciascun nodo dell'albero di generazione. In particolare, è sufficicente effettuare il prodotto tra i numeri catalani associati alla triangolazione del nodo di riferimento. In questo modo, del nodo radice verrà espanso solo il figlio il cui sottoalbero comprende il range di valori nel quale è presente il numero *r* estratto. Il processo viene quindi ripetuto e ad ogni iterazione  è selezionato soltanto il nodo con la dimensione  del sottoalbero di interesse.
+Sia ad esempio *N=5* e il numero *r* estratto=2. I figli del pentagono iniziale sono 3:
+- (1,2,5,1)-(2,3,4,5,2)
+- (1,2,3,1)-(1,3,5,1)-(3,4,5,3)
+- (1,2,3,4,1)-(1,4,5,1)
+
+che corrispondono appunto alle possibili combinazioni che si ottengono inserendo una triangolazione avente come base i vertici adiacenti (1,5)  e come terzo vertice gli altri possibili vertici. I tre figli risultano quindi così strutturati:
+- 1 triangolo + 1 quadrato  (1*2)
+- 3 triangoli               (1)
+- 1 triangolo + 1 quadrato (1*2)
+
 
 Per quello che riguarda il calcolo delgli ismorfismi di un determinato elemento si sfrutta una proprietà dei grafi planari riportata in [Rencostruction of maximal outerplanar graphs](http://ac.els-cdn.com/0012365X72900076/1-s2.0-0012365X72900076-main.pdf?_tid=1255f97e-7382-11e7-9d07-00000aab0f01&acdnat=1501238995_2af031d7b204f70c6f758f9a2c8d54f7), per la quale una label degree sequence è associata univocamente ad una configurazione del grafo. E' perciò possibile calcolare il numero di isomorfi genenerando le *n-1*  label degree sequence ottenute tramite rotazione circolare della triangolazione ottenuta e contare il numero *S* di sequenze identiche.
 Questo è il numero di isomorfi ruotati generati; per il calcolo del numero di mirror presenti è invece necessario ribaltare la sequenza e vedere se c'è una sovrapposizione con una delle *n-1* sequenze precedentemente generate. In caso affermativo il numero di isomorfi è *Sx2*, altrimenti è pari a *S*.
