@@ -96,7 +96,7 @@ che corrispondono appunto alle possibili combinazioni che si ottengono inserendo
 Tra parentesi tonde è mostrato il prodotto tra i numeri catalani dei poligoni ottenuti, tra le quadre la conta incrementale. A questo punto è sufficiente espandere il nodo che comprende *r*, ovvero il primo. Il processo viene ripetuto fino al raggiungimento della triangolazione massimale, che  coincide con la triangolazione di riferimento.
 
 Per quello che riguarda il calcolo delgli ismorfismi di un determinato elemento si sfrutta una proprietà dei grafi planari riportata in [Rencostruction of maximal outerplanar graphs](http://ac.els-cdn.com/0012365X72900076/1-s2.0-0012365X72900076-main.pdf?_tid=1255f97e-7382-11e7-9d07-00000aab0f01&acdnat=1501238995_2af031d7b204f70c6f758f9a2c8d54f7), per la quale una label degree sequence è associata univocamente ad una configurazione del grafo. E' perciò possibile calcolare il numero di isomorfi genenerando le *n-1*  label degree sequence ottenute tramite rotazione circolare della triangolazione ottenuta e contare il numero *S* di sequenze identiche.
-Questo è il numero di isomorfi ruotati generati; per il calcolo del numero di mirror presenti è invece necessario ribaltare la sequenza e vedere se c'è una sovrapposizione con una delle *n-1* sequenze precedentemente generate. In caso affermativo il numero di isomorfi è *Sx2*, altrimenti è pari a *S*.
+Questo è il numero di isomorfi ruotati generati; per il calcolo del numero di mirror presenti è invece necessario ribaltare la sequenza e vedere se c'è una sovrapposizione con una delle *n-1* sequenze precedentemente generate. In caso affermativo il numero di isomorfi è *Sx2*, altrimenti è pari a *S*. Questo perchè una delle triangolazioni mirror potrebbe in realtà coincedere con una delle rotazioni.
 
 # Validazione
 
@@ -126,3 +126,5 @@ Possiamo concludere che il nostro “dado” è equilibrato.
 Per eseguire il software è sufficiente scaricare la repository, installare i moduli richiesti e digitare i seguenti comandi:
 - per generare un grafo outerplanare massimale di *n* nodi 'python MainGenerator.py S -n'. L'output è l'insieme di triangolazioni espresse come triple di vertici.
 - per generare *K* grafi outerplanari massimali per ciascun grafo di *n* nodi con *n* compreso tra *i* e *j* 'python MainGenerator.py M -i -j. L'output sono i grafi outerplanari massimali espressi come  label degree sequence e la relativa conta. Viene anche fornito il valore del chi quadro.
+
+NB: è possibile specificare al massimo un grafo di dimensione *255*, perchè viene sfruttata la corrispondenza tra interi e simboli ASCII.
