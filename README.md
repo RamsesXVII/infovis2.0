@@ -128,3 +128,9 @@ Per eseguire il software è sufficiente scaricare la repository, installare i mo
 - per generare *K* grafi outerplanari massimali per ciascun grafo di *n* nodi con *n* compreso tra *i* e *j* 'python MainGenerator.py M -i -j. L'output sono i grafi outerplanari massimali espressi come  label degree sequence e la relativa conta. Viene anche fornito il valore del chi quadro.
 
 NB: è possibile specificare al massimo un grafo di dimensione *255*, perchè viene sfruttata la corrispondenza tra interi e simboli ASCII.
+
+# Autori
+Valerio Gregori
+Mattia Iodice
+Alessandro Oddi
+Alessandro Sgaraglia
