@@ -139,4 +139,4 @@ Mattia Iodice
 
 Alessandro Oddi: [GitHub: [adixia](https://github.com/adixia)]
 
-Alessandro Sgaraglia(AlexSgar)
+Alessandro Sgaraglia: [GitHub: [AlexSgar](https://github.com/AlexSgar)]
