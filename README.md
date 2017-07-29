@@ -52,7 +52,7 @@ Il problema di questo approccio è che vengono generati molti alberi isomorfi di
 ## Triangolazione di poligoni convessi
 
 Abbandonata l’idea di generare i grafi outerplanari a partire dagli alberi, si è voluto procedere con l’approccio basato sulle triangolazioni del poligono convesso.
-In letteratura sono presenti diversi algoritmi per la generazione di grafi outerplanari etichettati, piuttosto ridotta è invece la documentazione relativa a quelli non etichettati. Dall'articolo presente su  [Garethrees](http://garethrees.org/2013/06/15/triangulation/) abbiamo scelto di adottare la seguente funzione per la generazione di tutte le possibili triangolaizioni:
+In letteratura sono presenti diversi algoritmi per la generazione di grafi outerplanari etichettati, piuttosto ridotta è invece la documentazione relativa a quelli non etichettati. Dall'articolo presente su  [Garethrees](http://garethrees.org/2013/06/15/triangulation/) si è scelto quindi di adottare la seguente funzione per la generazione di tutte le possibili triangolaizioni:
 ```sh
 def triangulations(p):
     """Generate the triangulations of the convex polygon p.
@@ -75,7 +75,9 @@ def triangulations(p):
             for u, v in product(triangulations(p[:k + 1]), triangulations(p[k:])):
                 yield u + [(p[0], p[k], p[-1])] + v
 ```
-Essenzialmente si tratta della generazione di un albero in cui le foglie costituiscono le possibili triangolazioni. Tali triangolazioni, come specificato nella sezione precedente, sono però etichettate e quindi non c'è una distribuzione uniforme al numero di isomorfismi.
+Essenzialmente si tratta della generazione di un albero in cui le foglie costituiscono tutte le possibili triangolazioni etichettate. Il proccesso è ricorsivo e viene eseguito e a partire da un nodo radice che corrisponde quindi al poligono senza triangolazioni interne.  Ogni nodo viene espanso generando i figli che corrispondono a tutte le possibili combinazioni tra gli angoli del poligono e due vertici adiacenti fissati.
+
+Tali triangolazioni, come specificato nella sezione precedente, sono però etichettate e quindi non c'è una distribuzione uniforme al numero di isomorfismi.
 L'algortimo  di generazione randomica in modo uniforme dei grafi in questione si articola quindi nelle seguenti fasi:
 - Estrazione di un numero randomico *r* compreso tra *1* e il numero Catalano di *N*. L'estrazione di questo numero consentirà di scegliere in modo uniforme e randomico una delle possibili triangolazioni etichettate del poligono.
 - Viene generata soltanto l' *r*-esima triangolazione del poligono, senza costruire l'intero albero.
