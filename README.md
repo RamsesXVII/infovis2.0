@@ -46,7 +46,7 @@ Dalla lettura del paper [Generating Outerplanar Graphs Uniformly at Random](http
 Procedendo in questa direzione si è pensato ad un algoritmo che potesse generare tutti gli alberi di questa famiglia passato in input il numero di foglie desiderate.
 L’idea dietro l’algoritmo è la seguente: volendo generare un unrooted binary tree esiste sicuramente un nodo con grado tre padre di tre sottoalberi binari. Poiché l’albero deve avere esattamente N foglie, fissato questo numero, si crea una lista di triple di addendi che sommati diano esattamente N, ovvero il numero di foglie che ciascuno dei tre sottoalberi binari dovrà avere. Quindi selezionata una tripla della lista, per ogni numero in essa si generano sotto forma di stringa tutti i possibili binary tree di n foglie: questi sottoalberi sono tutti figli del nodo da cui è iniziata la generazione, che di fatto non è una foglia ed ha proprio grado tre. 
 Un’implementazione dell’algoritmo descritto è presente nel file binaryTreeUnrooted.py .
-Il problema di questo approccio è che vengono generati molti alberi isomorfi difficili da distinguere che ovviamente generano gli stessi outerplanar graph. 
+Il problema di questo approccio è che vengono generati molti alberi isomorfi difficili da distinguere che ovviamente generano gli stessi outerplanar graph. Per questo motivo, questa prima strategia non è stata portata avanti.
 
 # Approccio 2
 ## Triangolazione di poligoni convessi
