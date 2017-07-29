@@ -137,6 +137,6 @@ Valerio Gregori
 
 Mattia Iodice
 
-Alessandro Oddi
+Alessandro Oddi: [GitHub: [adixia](https://github.com/adixia)]
 
-Alessandro Sgaraglia
+Alessandro Sgaraglia(AlexSgar)
