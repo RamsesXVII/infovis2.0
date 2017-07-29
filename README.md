@@ -1,4 +1,4 @@
-# Generating maximal outerplanar uniformly at random
+# Generating maximal outerplanar graphs uniformly at random
 <p align="center">
   <img width="460" height="300" src="https://camo.githubusercontent.com/23de01ffa3d1ff0fe57b824cf6f516d96df88d2f/68747470733a2f2f707265766965772e6962622e636f2f645864744c512f696e666f766973646963652e706e67">
 </p>
@@ -19,15 +19,18 @@ Nella teoria dei grafi si definisce **grafo planare** un grafo che può essere r
 I **grafi outerplanari massimali** sono un sottoinsieme dei grafi planari e sono rappresentabili con tutti i vertici sulla faccia esterna del disegno, con il massimo numero di archi che non si intersecano.  
 L'obiettivo del progetto proposto in questa pagina è quindi quello di definire un algoritmo che generi grafi outerplanari non etichettati e massimali **uniformly at random**.
 # Approcci
+Sono possibibili diverse interpretazioni del problema e in particolare, dalla letteratura esistente, si ha che:
 
   - Il problema è sovrapponnibile a quello della generazione di triangolazioni di un poligono convesso.
   - C'è una relazione diretta tra gli unrooted binary tree ordinati con n foglie e i grafi outerplanari massimali.
 
-Per entrambi gli approcci una possibile soluzione potrebbe essere quella di utilizzare un algoritmo che genera tutti gli elementi della collezione per poi selezionarne randomicamente uno. Tale soluzione, tuttavia,  risulta impraticabile al crescere della dimensione del grafo. In particolare si ha che il numero di possibili outerplanar diversi al crescere di *n* segue la sequenza: 
+Per entrambi gli approcci una possibile soluzione potrebbe essere quella di utilizzare un algoritmo che genera tutti gli elementi della collezione per poi selezionarne randomicamente uno. Tale soluzione, tuttavia,  risulta impraticabile al crescere della dimensione del grafo. In particolare si ha che il numero di possibili outerplanar non etichettati  e massimali al crescere di *n*, con *n* pari al numero di nodi, segue la sequenza: 
 
 > 1, 1, 1, 3, 4, 12, 27, 82, 228, 733, 2282, 7528, 24834, 83898, 285357, 983244, 3412420, 11944614, 42080170, 149197152, 531883768, 1905930975, 6861221666, 24806004996, 90036148954, 327989004892, 1198854697588, 4395801203290, 16165198379984, 59609171366326, 220373278174641
 
-Nel caso particolare della triangolazione dei poligoni convessi il numero risulta invece associato al numero catalano. I risultati di questi algoritmi presentano quindi ripetizioni di possibili configurazioni in termini di rotazioni e mirroring. Nel caso specifico di un esagono risulta che le possibili triangolazioni sono le seguenti:
+Per ulteriori informazioni sulla sequenza, cliccare [qui](https://oeis.org/A000207).
+
+Nel caso particolare della triangolazione dei poligoni convessi il numero risulta invece associato al numero catalano. I risultati dei principali algoritmi per la triangolazione dei poligoni presentano infatti ripetizioni di possibili configurazioni in termini di rotazioni e mirroring. Nel caso specifico di un esagono risulta che le possibili triangolazioni sono le seguenti:
 
 <p align="center">
   <img width="460" height="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Catalan-Hexagons-example.svg/680px-Catalan-Hexagons-example.svg.png">
