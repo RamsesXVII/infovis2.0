@@ -108,7 +108,7 @@ Il processo di validazione dell’algoritmo sopra descritto presenta diverse ana
 Similmente a quanto viene fatto per la verifica dei dadi, si è quindi effettuato un test del Chi quadro, ampiamente utilizzato per verificare che le frequenze dei valori osservati si adattino alle frequenze teoriche di una distribuzione di probabilità prefissata. Fissato l'errore tollerato al 5% (p-value = 0.05), dando uno sguardo alle tavole della distribuzione chi quadrato con *F-1* gradi di libertà  è risultato molto semplice verificare se rifiutare l'ipotesi nulla o meno. 
 Il test del chi quadro è stato eseguito per  poligoni con *n* lati, con n compreso tra 6 e 13. Nella tabella sottostante sono riportati i risultati del test ottenuti:
 
-| Lati del poligono | Estrazioni effettive/Grafi generati | Poligoni non isomorfi | Chi square ottenuto | Limite  |
+| Lati del poligono | Estrazioni effettive/Grafi generati | Triangolazioni non isomorfe | Chi square ottenuto | Limite  |
 |-------------------|-------------------------------------|-----------------------|---------------------|---------|
 | 6                 | 232490/50000                        | 3                     | 0.00312             | 5.991   |
 | 7                 | 526009/50000                        | 4                     | 5.752               | 7.815   |
