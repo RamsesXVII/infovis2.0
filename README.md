@@ -131,6 +131,9 @@ NB: è possibile specificare al massimo un grafo di dimensione *255*, perchè vi
 
 # Autori
 Valerio Gregori
+
 Mattia Iodice
+
 Alessandro Oddi
+
 Alessandro Sgaraglia
