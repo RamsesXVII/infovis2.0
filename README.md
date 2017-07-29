@@ -10,6 +10,9 @@
 3. [Dagli unrooted binary tree ai grafi planari]( #approccio1)
 4. [Triangolazione di poligoni convessi]( #approccio2)
 5. [Validazione]( #validazione)
+6. [Esecuzione]( #esecuzione)
+7. [Autori]( #autori)
+
 
 
 
