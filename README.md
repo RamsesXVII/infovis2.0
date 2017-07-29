@@ -133,7 +133,7 @@ Per eseguire il software è sufficiente scaricare la repository, installare i mo
 NB: è possibile specificare al massimo un grafo di dimensione *255*, perchè viene sfruttata la corrispondenza tra interi e simboli ASCII.
 
 # Autori
-Valerio GregoriRamsesXVII
+Valerio Gregori: [GitHub: [Hyruma](https://github.com/Hyruma)]
 
 Mattia Iodice: [GitHub: [RamsesXVII](https://github.com/RamsesXVII)]
 
